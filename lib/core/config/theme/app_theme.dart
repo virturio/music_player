@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/data/core/config/theme/app_colors.dart';
+import 'package:music_player/core/config/theme/app_colors.dart';
 
 class AppTheme {
   static final lightTheme = ThemeData(

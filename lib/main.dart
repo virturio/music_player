@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/data/core/config/theme/app_theme.dart';
+import 'package:music_player/core/config/theme/app_theme.dart';
 
 void main() {
   runApp(const MainApp());
