@@ -5,6 +5,8 @@ import 'package:music_player/common/widgets/basic_app_button.dart';
 import 'package:music_player/core/config/assets/app_assets.dart';
 import 'package:music_player/core/config/theme/app_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_player/presentation/choose_mode/bloc/theme_qubit.dart';
 
 class ChooseModePage extends StatelessWidget {
   const ChooseModePage({super.key});
@@ -41,17 +43,23 @@ class ChooseModePage extends StatelessWidget {
                 style: textStyleMedium,
               ),
               const SizedBox(height: 40),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _ThemeModeIcon.asset(
                     assetName: AppVectors.moon,
                     title: "Dark Mode",
+                    onTap: () {
+                      context.read<ThemeQubit>().updateTheme(ThemeMode.dark);
+                    },
                   ),
-                  SizedBox(width: 40),
+                  const SizedBox(width: 40),
                   _ThemeModeIcon.asset(
                     assetName: AppVectors.sun,
                     title: "Light Mode",
+                    onTap: () {
+                      context.read<ThemeQubit>().updateTheme(ThemeMode.light);
+                    },
                   ),
                 ],
               ),
@@ -73,8 +81,10 @@ class ChooseModePage extends StatelessWidget {
 class _ThemeModeIcon extends StatelessWidget {
   final String assetName;
   final String title;
+  final VoidCallback onTap;
 
-  const _ThemeModeIcon.asset({required this.assetName, required this.title});
+  const _ThemeModeIcon.asset(
+      {required this.assetName, required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -86,19 +96,24 @@ class _ThemeModeIcon extends StatelessWidget {
 
     return Column(
       children: [
-        ClipOval(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: const Color(0xff30393c).withOpacity(.5),
-              ),
-              height: 50,
-              width: 50,
-              child: SvgPicture.asset(
-                assetName,
-                fit: BoxFit.none,
+        InkWell(
+          onTap: onTap,
+          child: Ink(
+            child: ClipOval(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: const Color(0xff30393c).withOpacity(.5),
+                  ),
+                  height: 50,
+                  width: 50,
+                  child: SvgPicture.asset(
+                    assetName,
+                    fit: BoxFit.none,
+                  ),
+                ),
               ),
             ),
           ),
