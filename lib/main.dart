@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:music_player/core/config/theme/app_theme.dart';
+import 'package:music_player/presentation/auth/pages/auth_page.dart';
 import 'package:music_player/presentation/choose_mode/bloc/theme_qubit.dart';
 import 'package:music_player/presentation/splash/pages/splash.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -35,6 +36,7 @@ class MainApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             home: const Scaffold(
               body: SplashPage(),
+              // body: AuthPage(),
             ),
           );
         },

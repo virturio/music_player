@@ -7,6 +7,13 @@ class AppTheme {
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.lightBackground,
     fontFamily: 'Satoshi',
+    appBarTheme: const AppBarTheme(
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      surfaceTintColor: Colors.transparent,
+      foregroundColor: Colors.black,
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
@@ -25,5 +32,8 @@ class AppTheme {
   static final darkTheme = lightTheme.copyWith(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.darkBackground,
+    appBarTheme: lightTheme.appBarTheme.copyWith(
+      foregroundColor: Colors.white,
+    ),
   );
 }
