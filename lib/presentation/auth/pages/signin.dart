@@ -4,10 +4,29 @@ import 'package:music_player/common/utils/utils.dart';
 import 'package:music_player/common/widgets/basic_app_bar.dart';
 import 'package:music_player/common/widgets/basic_app_button.dart';
 import 'package:music_player/core/config/assets/app_assets.dart';
+import 'package:music_player/data/models/auth/signin_user_req.dart';
+import 'package:music_player/domain/usecases/signin_usecase.dart';
 import 'package:music_player/presentation/auth/pages/signup.dart';
+import 'package:music_player/presentation/root/pages/root.dart';
+import 'package:music_player/service_locator.dart';
 
-class SigninPage extends StatelessWidget {
+class SigninPage extends StatefulWidget {
   const SigninPage({super.key});
+
+  @override
+  State<SigninPage> createState() => _SigninPageState();
+}
+
+class _SigninPageState extends State<SigninPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +51,33 @@ class SigninPage extends StatelessWidget {
       );
     }
 
+    void goToRootPage() {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const RootPage(),
+        ),
+        (route) => false,
+      );
+    }
+
+    void signIn() async {
+      final result = await sl.get<SigninUseCase>().call(
+            params: SigninUserRequest(
+              email: _emailController.text,
+              password: _passwordController.text,
+            ),
+          );
+
+      result.fold(
+        (l) {
+          final snackBar = SnackBar(content: Text(l));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        },
+        (r) => goToRootPage(),
+      );
+    }
+
     return Scaffold(
       appBar: BasicAppBar(
         centerTitle: true,
@@ -49,20 +95,22 @@ class SigninPage extends StatelessWidget {
           children: [
             headingText,
             const SizedBox(height: 44),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: _emailController,
+              decoration: const InputDecoration(
                 hintText: "Email",
               ),
             ),
             const SizedBox(height: 18),
-            const TextField(
+            TextField(
+              controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Password",
               ),
             ),
             const SizedBox(height: 54),
-            BasicAppButton(title: "Sign in", onPressed: () {}),
+            BasicAppButton(title: "Sign in", onPressed: signIn),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
