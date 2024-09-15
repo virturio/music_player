@@ -4,14 +4,37 @@ import 'package:music_player/common/utils/utils.dart';
 import 'package:music_player/common/widgets/basic_app_bar.dart';
 import 'package:music_player/common/widgets/basic_app_button.dart';
 import 'package:music_player/core/config/assets/app_assets.dart';
+import 'package:music_player/data/models/auth/create_user_req.dart';
+import 'package:music_player/domain/usecases/signup_usecase.dart';
 import 'package:music_player/presentation/auth/pages/signin.dart';
+import 'package:music_player/presentation/root/pages/root.dart';
+import 'package:music_player/service_locator.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
+
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  final TextEditingController _fullnameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = context.isDarkMode;
+    TextStyle? headingTextStyle = Theme.of(context).textTheme.displaySmall;
+
+    Widget headingText = Text(
+      textAlign: TextAlign.center,
+      "Register",
+      style: headingTextStyle?.copyWith(
+        color: isDarkMode ? Colors.white : Colors.black,
+        fontWeight: FontWeight.bold,
+      ),
+    );
 
     void goToSigninPage() {
       Navigator.pushReplacement(
@@ -19,6 +42,34 @@ class SignupPage extends StatelessWidget {
         MaterialPageRoute(
           builder: (_) => const SigninPage(),
         ),
+      );
+    }
+
+    void goToRootPage() {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const RootPage(),
+        ),
+        (route) => false,
+      );
+    }
+
+    void signUp() async {
+      final result = await sl.get<SignupUseCase>().call(
+            params: CreateUserRequest(
+              fullname: _fullnameController.text,
+              email: _emailController.text,
+              password: _passwordController.text,
+            ),
+          );
+
+      result.fold(
+        (l) {
+          final snackBar = SnackBar(content: Text(l));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        },
+        (r) => goToRootPage(),
       );
     }
 
@@ -37,24 +88,31 @@ class SignupPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            const AuthHeaderText(
-              title: "Register",
-            ),
+            headingText,
             const SizedBox(height: 44),
-            const BasicAppTextField(
-              hintText: "Fullname",
+            TextField(
+              controller: _fullnameController,
+              decoration: const InputDecoration(
+                hintText: "Fullname",
+              ),
             ),
             const SizedBox(height: 18),
-            const BasicAppTextField(
-              hintText: "Email",
+            TextField(
+              controller: _emailController,
+              decoration: const InputDecoration(
+                hintText: "Email",
+              ),
             ),
             const SizedBox(height: 18),
-            const BasicAppTextField(
-              hintText: "Password",
+            TextField(
               obscureText: true,
+              controller: _passwordController,
+              decoration: const InputDecoration(
+                hintText: "Password",
+              ),
             ),
             const SizedBox(height: 54),
-            BasicAppButton(title: "Create Account", onPressed: () {}),
+            BasicAppButton(title: "Create Account", onPressed: signUp),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -78,48 +136,6 @@ class SignupPage extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class BasicAppTextField extends StatelessWidget {
-  const BasicAppTextField({
-    super.key,
-    required this.hintText,
-    this.obscureText = false,
-  });
-
-  final String hintText;
-  final bool obscureText;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      obscureText: obscureText,
-      decoration: InputDecoration(
-        hintText: hintText,
-      ),
-    );
-  }
-}
-
-class AuthHeaderText extends StatelessWidget {
-  const AuthHeaderText({super.key, required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    TextStyle? style = Theme.of(context).textTheme.displaySmall;
-    bool isDarkMode = context.isDarkMode;
-
-    return Text(
-      textAlign: TextAlign.center,
-      title,
-      style: style?.copyWith(
-        color: isDarkMode ? Colors.white : Colors.black,
-        fontWeight: FontWeight.bold,
       ),
     );
   }
