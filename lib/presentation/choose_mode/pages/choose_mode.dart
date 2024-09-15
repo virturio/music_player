@@ -6,6 +6,7 @@ import 'package:music_player/core/config/assets/app_assets.dart';
 import 'package:music_player/core/config/theme/app_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_player/presentation/auth/pages/auth_page.dart';
 import 'package:music_player/presentation/choose_mode/bloc/theme_qubit.dart';
 
 class ChooseModePage extends StatelessWidget {
@@ -13,7 +14,14 @@ class ChooseModePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void goTo() {}
+    void goTo() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const AuthPage(),
+        ),
+      );
+    }
 
     TextStyle textStyleMedium = const TextStyle(
       fontSize: 18,

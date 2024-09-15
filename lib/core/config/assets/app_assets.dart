@@ -4,6 +4,8 @@ class AppVectors {
   static const String logo = "${basePath}spotify_logo$format";
   static const String sun = "${basePath}sun$format";
   static const String moon = "${basePath}moon$format";
+  static const String topPattern = "${basePath}top_pattern$format";
+  static const String bottomPattern = "${basePath}bottom_pattern$format";
 }
 
 class AppImages {
@@ -11,4 +13,5 @@ class AppImages {
   static const String format = ".png";
   static const String introBg = "${basePath}intro_bg$format";
   static const String chooseModeBg = "${basePath}choose_mode_bg$format";
+  static const String authBg = "${basePath}auth_bg$format";
 }
