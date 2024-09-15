@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:music_player/common/utils/utils.dart';
 
-class BasicAppBar extends StatelessWidget {
-  const BasicAppBar({super.key});
+class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const BasicAppBar({
+    super.key,
+    this.title,
+    this.centerTitle = false,
+  });
+
+  final Widget? title;
+  final bool centerTitle;
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
     final bool isDark = context.isDarkMode;
     return AppBar(
+      title: title,
+      centerTitle: centerTitle,
       leading: IconButton(
         onPressed: () {
           Navigator.maybePop(context);
