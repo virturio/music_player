@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "860277676032",
+    "project_id": "spotify-c01",
+    "storage_bucket": "spotify-c01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860277676032:android:645bc48c373f32f00460e5",
+        "android_client_info": {
+          "package_name": "com.virturio.spotifyclone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnkWZVWbH1bQkLRIyR_I-JoZIugpSOopg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
