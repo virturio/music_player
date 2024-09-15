@@ -6,6 +6,7 @@ import 'package:music_player/firebase_options.dart';
 import 'package:music_player/presentation/choose_mode/bloc/theme_qubit.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:music_player/presentation/splash/pages/splash.dart';
+import 'package:music_player/service_locator.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,9 +17,13 @@ Future<void> main() async {
         ? HydratedStorage.webStorageDirectory
         : await getApplicationDocumentsDirectory(),
   );
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await initializeDependencies();
+
   runApp(const MainApp());
 }
 
