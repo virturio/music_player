@@ -14,10 +14,10 @@ class SignupPage extends StatelessWidget {
     bool isDarkMode = context.isDarkMode;
 
     void goToSigninPage() {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) => const SignInPage(),
+          builder: (_) => const SigninPage(),
         ),
       );
     }

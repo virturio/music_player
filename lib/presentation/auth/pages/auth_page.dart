@@ -5,6 +5,7 @@ import 'package:music_player/common/widgets/basic_app_button.dart';
 import 'package:music_player/core/config/assets/app_assets.dart';
 import 'package:music_player/common/utils/utils.dart' as util;
 import 'package:music_player/core/config/theme/app_colors.dart';
+import 'package:music_player/presentation/auth/pages/signin.dart';
 import 'package:music_player/presentation/auth/pages/signup.dart';
 
 class AuthPage extends StatelessWidget {
@@ -31,6 +32,15 @@ class AuthPage extends StatelessWidget {
         context,
         MaterialPageRoute(
           builder: (_) => const SignupPage(),
+        ),
+      );
+    }
+
+    void goToSigninPage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const SigninPage(),
         ),
       );
     }
@@ -87,7 +97,7 @@ class AuthPage extends StatelessWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: BasicAppButton(
-                        onPressed: () {},
+                        onPressed: goToSigninPage,
                         title: "Sign in",
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
