@@ -37,6 +37,7 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
   Future<Either> signup(CreateUserRequest request) async {
     try {
       final data = await _firebaseAuth.createUserWithEmailAndPassword(
+      await _firebaseAuth.createUserWithEmailAndPassword(
         email: request.email,
         password: request.password,
       );
