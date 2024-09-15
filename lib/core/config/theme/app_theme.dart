@@ -7,6 +7,34 @@ class AppTheme {
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.lightBackground,
     fontFamily: 'Satoshi',
+    inputDecorationTheme: InputDecorationTheme(
+      fillColor: Colors.transparent,
+      filled: true,
+      hintStyle: const TextStyle(
+        color: Color(0xff383838),
+        fontWeight: FontWeight.w500,
+      ),
+      focusColor: AppColors.primary,
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: const BorderSide(
+            color: AppColors.primary,
+            width: .4,
+          )),
+      contentPadding: const EdgeInsets.all(30),
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: const BorderSide(
+            color: Colors.white,
+            width: .4,
+          )),
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: const BorderSide(
+            color: Colors.black,
+            width: .4,
+          )),
+    ),
     appBarTheme: const AppBarTheme(
       elevation: 0,
       backgroundColor: Colors.transparent,
@@ -34,6 +62,27 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.darkBackground,
     appBarTheme: lightTheme.appBarTheme.copyWith(
       foregroundColor: Colors.white,
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      fillColor: Colors.transparent,
+      filled: true,
+      hintStyle: const TextStyle(
+        color: Color(0xffa7a7a7),
+        fontWeight: FontWeight.w500,
+      ),
+      contentPadding: const EdgeInsets.all(30),
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: const BorderSide(
+            color: Colors.black,
+            width: .4,
+          )),
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: const BorderSide(
+            color: Colors.white,
+            width: .4,
+          )),
     ),
   );
 }

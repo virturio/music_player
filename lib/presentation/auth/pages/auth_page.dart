@@ -5,6 +5,7 @@ import 'package:music_player/common/widgets/basic_app_button.dart';
 import 'package:music_player/core/config/assets/app_assets.dart';
 import 'package:music_player/common/utils/utils.dart' as util;
 import 'package:music_player/core/config/theme/app_colors.dart';
+import 'package:music_player/presentation/auth/pages/signup.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -24,6 +25,15 @@ class AuthPage extends StatelessWidget {
       fontWeight: FontWeight.w400,
       color: AppColors.grey,
     );
+
+    void goToSignupPage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const SignupPage(),
+        ),
+      );
+    }
 
     return Scaffold(
       body: Stack(
@@ -71,7 +81,7 @@ class AuthPage extends StatelessWidget {
                     Expanded(
                       child: BasicAppButton(
                         title: "Sign up",
-                        onPressed: () {},
+                        onPressed: goToSignupPage,
                       ),
                     ),
                     const SizedBox(width: 8),
