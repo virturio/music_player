@@ -1,19 +1,19 @@
 import 'package:music_player/domain/entities/song/song.dart';
 
-sealed class SongsState {}
+sealed class PlaylistState {}
 
-final class SongsLoading extends SongsState {}
+final class PlaylistLoading extends PlaylistState {}
 
-final class SongsLoaded extends SongsState {
-  SongsLoaded({
+final class PlaylistLoaded extends PlaylistState {
+  PlaylistLoaded({
     required this.songs,
   });
 
   final List<SongEntity> songs;
 }
 
-final class SongsLoadFailure extends SongsState {
-  SongsLoadFailure({
+final class PlaylistLoadFailure extends PlaylistState {
+  PlaylistLoadFailure({
     required this.error,
   });
 

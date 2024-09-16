@@ -3,10 +3,14 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:music_player/data/models/auth/create_user_req.dart';
 import 'package:music_player/data/models/auth/signin_user_req.dart';
+import 'package:music_player/data/models/auth/user.dart';
+import 'package:music_player/domain/entities/user.dart';
 
 abstract class AuthFirebaseService {
   Future<Either> signin(SigninUserRequest request);
   Future<Either> signup(CreateUserRequest request);
+
+  Future<Either> getUser();
 }
 
 class AuthFirebaseServiceImpl extends AuthFirebaseService {
@@ -55,6 +59,23 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
       };
 
       return Left(message);
+    }
+  }
+
+  @override
+  Future<Either> getUser() async {
+    try {
+      var user = await _firestore
+          .collection('Users')
+          .doc(_firebaseAuth.currentUser?.uid)
+          .get();
+
+      UserModel userModel = UserModel.fromJson(user.data()!);
+      userModel.imageURL = _firebaseAuth.currentUser?.photoURL ?? '';
+      UserEntity userEntity = userModel.toEntity();
+      return Right(userEntity);
+    } catch (e) {
+      return const Left('An error occurred');
     }
   }
 }

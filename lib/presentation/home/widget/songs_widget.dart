@@ -12,12 +12,13 @@ class SongsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SongsCubit()..getSongs(),
-      child: BlocBuilder<SongsCubit, SongsState>(
+      child: BlocBuilder<SongsCubit, PlaylistState>(
         builder: (context, state) {
           return switch (state) {
-            SongsLoading() => const Center(child: CircularProgressIndicator()),
-            SongsLoadFailure() => Center(child: Text(state.error)),
-            SongsLoaded() => SizedBox(
+            PlaylistLoading() =>
+              const Center(child: CircularProgressIndicator()),
+            PlaylistLoadFailure() => Center(child: Text(state.error)),
+            PlaylistLoaded() => SizedBox(
                 height: 200,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,

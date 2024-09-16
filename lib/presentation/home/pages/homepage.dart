@@ -4,6 +4,7 @@ import 'package:music_player/common/utils/utils.dart';
 import 'package:music_player/common/widgets/basic_app_bar.dart';
 import 'package:music_player/core/config/assets/app_assets.dart';
 import 'package:music_player/core/config/theme/app_colors.dart';
+import 'package:music_player/presentation/home/widget/playlist.dart';
 import 'package:music_player/presentation/home/widget/songs_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -47,7 +48,9 @@ class _HomePageState extends State<HomePage>
                 Container(),
                 Container(),
               ]),
-            )
+            ),
+            const SizedBox(height: 40),
+            const Playlist(),
           ],
         ),
       ),
