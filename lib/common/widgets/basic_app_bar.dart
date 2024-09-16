@@ -6,9 +6,11 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     this.title,
     this.centerTitle = false,
+    this.hideLeading = false,
   });
 
   final Widget? title;
+  final bool hideLeading;
   final bool centerTitle;
 
   @override
@@ -17,28 +19,31 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDark = context.isDarkMode;
+
     return AppBar(
       title: title,
       centerTitle: centerTitle,
-      leading: IconButton(
-        onPressed: () {
-          Navigator.maybePop(context);
-        },
-        icon: Container(
-          height: 50,
-          width: 50,
-          decoration: BoxDecoration(
-            color: isDark
-                ? Colors.white.withOpacity(.03)
-                : Colors.black.withOpacity(.03),
-            shape: BoxShape.circle,
-          ),
-          child: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-            size: 15,
-          ),
-        ),
-      ),
+      leading: !hideLeading
+          ? IconButton(
+              onPressed: () {
+                Navigator.maybePop(context);
+              },
+              icon: Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? Colors.white.withOpacity(.03)
+                      : Colors.black.withOpacity(.03),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  size: 15,
+                ),
+              ),
+            )
+          : null,
     );
   }
 }
