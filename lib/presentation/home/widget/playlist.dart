@@ -13,7 +13,7 @@ class Playlist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PlaylistCubit(),
+      create: (context) => PlaylistCubit()..getSongs(),
       child: BlocBuilder<PlaylistCubit, PlaylistState>(
         builder: (context, state) {
           return switch (state) {
