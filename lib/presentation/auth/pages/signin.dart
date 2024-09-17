@@ -5,9 +5,9 @@ import 'package:music_player/common/widgets/basic_app_bar.dart';
 import 'package:music_player/common/widgets/basic_app_button.dart';
 import 'package:music_player/core/config/assets/app_assets.dart';
 import 'package:music_player/data/models/auth/signin_user_req.dart';
-import 'package:music_player/domain/usecases/signin_usecase.dart';
+import 'package:music_player/domain/usecases/auth/signin_usecase.dart';
 import 'package:music_player/presentation/auth/pages/signup.dart';
-import 'package:music_player/presentation/root/pages/root.dart';
+import 'package:music_player/presentation/home/pages/homepage.dart';
 import 'package:music_player/service_locator.dart';
 
 class SigninPage extends StatefulWidget {
@@ -55,7 +55,7 @@ class _SigninPageState extends State<SigninPage> {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (_) => const RootPage(),
+          builder: (_) => const HomePage(),
         ),
         (route) => false,
       );

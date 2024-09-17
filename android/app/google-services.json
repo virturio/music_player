@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:860277676032:android:645bc48c373f32f00460e5",
         "android_client_info": {
-          "package_name": "com.virturio.spotifyclone"
+          "package_name": "com.virturio.music_player"
         }
       },
       "oauth_client": [],

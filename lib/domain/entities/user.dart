@@ -1,11 +1,11 @@
 class UserEntity {
   final String fullname;
   final String email;
-  final String userId;
+  final String imageURL;
 
   const UserEntity({
     required this.fullname,
     required this.email,
-    required this.userId,
+    required this.imageURL,
   });
 }

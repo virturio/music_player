@@ -6,6 +6,7 @@ class AppVectors {
   static const String moon = "${basePath}moon$format";
   static const String topPattern = "${basePath}top_pattern$format";
   static const String bottomPattern = "${basePath}bottom_pattern$format";
+  static const String homeTopCard = "${basePath}home_top_card$format";
 }
 
 class AppImages {
@@ -14,4 +15,5 @@ class AppImages {
   static const String introBg = "${basePath}intro_bg$format";
   static const String chooseModeBg = "${basePath}choose_mode_bg$format";
   static const String authBg = "${basePath}auth_bg$format";
+  static const String homeArtist = "${basePath}home_artist$format";
 }
