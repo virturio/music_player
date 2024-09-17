@@ -22,20 +22,33 @@ class SongsWidget extends StatelessWidget {
                 height: 200,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
+                  separatorBuilder: (_, i) => const SizedBox(width: 16),
                   itemBuilder: (context, index) {
-                    return SizedBox(
-                      height: 160,
+                    final int lastIndex = state.songs.length - 1;
+
+                    EdgeInsetsGeometry? padding;
+                    if (index == lastIndex) {
+                      padding = const EdgeInsets.only(right: 16);
+                    } else if (index == 0) {
+                      padding = const EdgeInsets.only(left: 16);
+                    }
+
+                    return Container(
+                      padding: padding,
+                      height: 140,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
                             child: Container(
+                              width: 150,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
                                 image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image:
-                                      NetworkImage(state.songs[index].coverImg),
+                                  fit: BoxFit.none,
+                                  image: NetworkImage(
+                                    state.songs[index].coverImg,
+                                  ),
                                 ),
                               ),
                               child: Align(
@@ -78,7 +91,6 @@ class SongsWidget extends StatelessWidget {
                       ),
                     );
                   },
-                  separatorBuilder: (_, i) => const SizedBox(width: 8),
                   itemCount: state.songs.length,
                 ),
               ),
